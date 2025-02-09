@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useState, useEffect } from "react";
 import Modal from '@mui/material/Modal';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useDispatch } from "react-redux";
@@ -29,6 +29,16 @@ const EditModal: React.FC<ModalProps> = ({ product, isOpen, handleModalClose }) 
     });
     const [formError, setFormError] = useState<Partial<Products>>({});
     const dispatch = useDispatch<AppDispatch>();
+
+    useEffect(() => {
+        setFormValue({
+            name: product.name,
+            category: product.category,
+            price: product.price.replace("$", ""),
+            quantity: product.quantity,
+            value: product.value.replace("$", "")
+        });
+    }, [product])
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;

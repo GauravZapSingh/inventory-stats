@@ -36,7 +36,7 @@ const Dashboard = () => {
         return () => {
             isMounted = false;
         };
-    }, [])
+    }, [dispatch])
 
     const renderError = () => (
         <h1>Something Went Wrong!</h1>

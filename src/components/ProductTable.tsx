@@ -5,7 +5,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../redux/store";
-import { deleteProduct, editProduct } from "../redux/productSlice";
+import { deleteProduct } from "../redux/productSlice";
 import EditModal from "./EditModal";
 
 interface Products {

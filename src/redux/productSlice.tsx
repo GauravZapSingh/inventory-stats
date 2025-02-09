@@ -51,6 +51,7 @@ const productSlice = createSlice({
             );
             if (index !== -1) {
                 state.products[index] = action.payload;
+                state.products[index].value = String(Number(action.payload.price.replace("$", "")) * Number(action.payload.quantity))
             }
             productSlice.caseReducers.setProducts(state, { payload: state.products } as any);
         },
