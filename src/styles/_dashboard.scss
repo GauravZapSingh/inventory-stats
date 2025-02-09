@@ -1,0 +1,64 @@
+@import "./_variable.scss";
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+
+    .section-header {
+        font-size: 45px;
+    }
+}
+
+// Inventory Stats
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    .stats-card {
+        display: flex;
+        flex: 1;
+        background: #243325;
+        border-radius: 10px;
+        padding: 20px;
+
+        &__icon {
+            font-size: 20px;
+        }
+
+        &__content {
+            margin-left: 20px;
+        }
+
+        &__title {
+            font-size: 14px;
+        }
+
+        &__value {
+            font-size: 30px;
+        }
+    }
+}
+
+// Skeleton {
+.skeleton {
+    &__row {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+
+        span {
+            background-color: grey;
+            border-radius: 10px;
+            width: 25%;
+            height: 200px;
+        }
+    }
+
+    &__box {
+        height: 600px;
+        margin-top: 25px;
+        background-color: grey;
+        border-radius: 10px;
+    }
+}

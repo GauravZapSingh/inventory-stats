@@ -1,0 +1,11 @@
+@import "./styles/_variable.scss";
+
+body {
+  background: $primary-color;
+  color: $primary-font-color;
+}
+
+@import url(./styles/_header.scss);
+@import url(./styles/_dashboard.scss);
+@import url(./styles/_edit-modal.scss);
+@import url(./styles/_product-table.scss);
