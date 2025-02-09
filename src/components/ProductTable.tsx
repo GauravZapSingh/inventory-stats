@@ -18,7 +18,7 @@ interface Products {
 
 const ProductTable = () => {
     const [selectedProduct, setSelectedProduct] = useState<Products | null>(null);
-    const [disabledProduct, setDisabledProduct] = useState<number | null>(null);
+    const [disabledProducts, setDisabledProducts] = useState<string[]>([]);
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const productsSummary = useSelector((state: RootState) => state.product);
     const isUser = useSelector((state: RootState) => state.role).isUser;
@@ -40,7 +40,7 @@ const ProductTable = () => {
             </div>
             {productsSummary.products.length ?
                 productsSummary.products.map((product, index) => (
-                    <div className={`product-list__body ${disabledProduct === index ? "admin-disabled" : ""}`} key={product.name + index}>
+                    <div className={`product-list__body ${disabledProducts.includes(product.name) ? "admin-disabled" : ""}`} key={product.name + index}>
                         <div className="product-list__value flex-2"><span>{product.name}</span></div>
                         <div className="product-list__value"><span>{product.category}</span></div>
                         <div className="product-list__value"><span>{product.price}</span></div>
@@ -48,19 +48,19 @@ const ProductTable = () => {
                         <div className="product-list__value"><span>{product.value}</span></div>
                         <div className="product-list__value actions">
                             <EditIcon onClick={() => {
-                                if (!isUser && disabledProduct !== index) {
+                                if (!isUser && !disabledProducts.includes(product.name)) {
                                     setSelectedProduct(product);
                                     setIsEditing(true);
                                 }
                             }} color="success" />
-                            {disabledProduct === index ?
-                                <VisibilityOffIcon onClick={() => !isUser && setDisabledProduct(null)} color="primary" /> :
-                                <VisibilityIcon onClick={() => !isUser && setDisabledProduct(index)} color="primary" />
+                            {disabledProducts.includes(product.name) ?
+                                <VisibilityOffIcon onClick={() => !isUser && setDisabledProducts(disabledProducts.filter(prod => prod !== product.name))} color="primary" /> :
+                                <VisibilityIcon onClick={() => !isUser && setDisabledProducts((prev) => [...prev, product.name])} color="primary" />
                             }
                             <DeleteIcon onClick={() => {
                                 if (!isUser) {
                                     dispatch(deleteProduct(product));
-                                    setDisabledProduct(null);
+                                    setDisabledProducts(disabledProducts.filter(prod => prod !== product.name));
                                 }
                             }} color="error" />
                         </div>
